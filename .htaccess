@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^annapurna\.in.net [NC]
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://annapurna.in.net/$1 [R,L]
+
+#RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond $1 !^(index\.php|assets|image|resources|tribalsoft|staging|robots\.txt)
+#RewriteCond %{ENV:REDIRECT_STATUS} ^$
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]

@@ -1,0 +1,8 @@
+<?php
+set_time_limit (0);
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Load_today_items  extends CI_Controller {
+ 
+	public function index()	{				$today_date  = date('Y-m-d');		 		echo $today_date."\n";;		 $cron_rs  = $this->db->query("select * from cronjobs where cron_code='load_item_balances' and entry_date='$today_date' ");		 if($cron_rs->num_rows()==0)		 {			  $this->db->trans_start();									$this->db->query("insert into cronjobs set cron_code='load_item_balances' , entry_date='$today_date',cron_title='Loading Daily Balances' ");				 				$this->db->query("insert into balance_sheet (school_id, item_id,  entry_date, opening_quantity, closing_quantity) select school_id, item_id,CURRENT_DATE as entry_date,closing_quantity as opening_quantity, closing_quantity as closing_quantity from balance_sheet where entry_date=DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)");					 echo "\n Rows effected : ".$this->db->affected_rows()." \n ";		 		 //echo $this->db->last_query();die; 				 $this->db->trans_complete();					if ($this->db->trans_status() === FALSE)					{						echo "Failed to execute cron load_item_balances " .date('d-m-Y H:i:s');					}					else					{						echo "successfully executed cron load_item_balances " .date('d-m-Y H:i:s');					}				 }		 else		 {			 echo "Cron already executed ".date('d-m-Y H:i:s');;		 }		 		 					}	 
+}

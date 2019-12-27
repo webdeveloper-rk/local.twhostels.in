@@ -179,9 +179,19 @@ class Report_monthly_consumed extends MX_Controller {
 		
 		$balance = $allowed_amount - $consumed_amount;
 		
+		
+		
+		
+		$pur_sql = "select 
+								TRUNCATE(sum(purchase_quantity * purchase_price),2) as purchased_amount from  $stock_entry_table 
+								  where school_id=?  and month(`entry_date`) =?  and year(`entry_date`) = ? ";
+		$purchased_amount = $this->db->query($pur_sql,array($school_id, $month,$year))->row()->purchased_amount;
+		
+		
 		$data['month'] = $month;
 		$data['year'] = $year;
 		$data['balance'] = $balance;
+		$data['purchased_amount'] = $purchased_amount;
 		$data['allowed_amount'] = $allowed_amount;
 		$data['consumed_amount'] = $consumed_amount;
 		$data['attendece'] =  $attendece;

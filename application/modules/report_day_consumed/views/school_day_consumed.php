@@ -98,26 +98,26 @@
 					 </table>
                   </div>
                 </div>
-			 
+			  <div class="form-group">                  <label for="inputEmail3" class="col-sm-2 control-label">Purchased Amount</label>                  <div  >                    <?php  echo  number_format($today_purchased_Amount,2);?>                  </div>                </div>
 				 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Allowed Amount</label>
 
                   <div  >
-                    <?php  echo $today_allowed_Amount;?>
+                    <?php  echo number_format($today_allowed_Amount,2);?>
                   </div>
                 </div>
 				 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Consumed Amount</label>
 
                   <div  >
-                    <?php  echo  ($today_consumed_Amount);?>
+                    <?php  echo  number_format($today_consumed_Amount,2);?>
                   </div>
                 </div>
 				 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Remaining Amount</label>
 
                   <div  >
-                   <?php  echo $today_remaining_Amount;?><br><br>
+                   <?php  echo  number_format($today_remaining_Amount,2);?><br><br>
                   </div>
                 </div>
 				<?php } ?>

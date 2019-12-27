@@ -180,6 +180,12 @@ class Report_day_consumed extends MX_Controller {
 		$data['group_3_perday_price'] = number_format($group_3_perday_price,4);
 		 
 	 
+		$pur_sql  = "select TRUNCATE(sum(purchase_quantity * purchase_price),2) as purchased_total
+					from $stock_entry_table where school_id=? and entry_date=?";
+	 
+		$today_purchased_Amount = $this->db->query($pur_sql,array($school_id,$school_date))->row()->purchased_total;
+	 
+	 
 		$today_allowed_Amount = $group_1_price + $group_2_price + $group_3_price;
 		/**************************************/
 		
@@ -189,9 +195,10 @@ class Report_day_consumed extends MX_Controller {
         $data["per_stundent"] = $daily_amount;
         $data["attendence"] = $attendece;
 		
-        $data["today_allowed_Amount"] = number_format($today_allowed_Amount,2);
+        $data["today_allowed_Amount"] = $today_allowed_Amount ;
         $data["today_consumed_Amount"] = $today_consumed_Amount;
-        $data["today_remaining_Amount"] = number_format($today_allowed_Amount -  $today_consumed_Amount,2);
+        $data["today_purchased_Amount"] = $today_purchased_Amount;
+        $data["today_remaining_Amount"] =  $today_allowed_Amount -  $today_consumed_Amount ;
 		
         $data["school_date"] = $school_date;
         $data["school_code"] = $school_code;

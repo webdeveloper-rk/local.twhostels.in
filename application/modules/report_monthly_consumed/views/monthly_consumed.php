@@ -141,6 +141,12 @@ echo $this->session->flashdata('message');
 <div style='padding-left:30px;'>				
 				    <!-- Date -->
               <div class="form-group">
+                <label>Total Purchased:</label>
+
+                <div class="input-group date">
+                 <?php echo number_format($purchased_amount,2);?>
+              </div>
+			  </div> <div class="form-group">
                 <label>Total Consumed:</label>
 
                 <div class="input-group date">

@@ -402,9 +402,9 @@ class Manage extends MX_Controller {
 			$crud->field_type('ehostel_id', 'hidden', $ehostel_id);
 			$crud->field_type('ehostel_vendor_id', 'hidden', $ehostel_vendor_id);
 			 
-			$crud->columns(array('vendor_type', 'vendor_name','business_nature', 'vendor_address','vendor_contact_number',  'vendor_bank','vendor_bank_branch', 'vendor_account_number' ));
-			$crud->add_fields(array('school_id','ehostel_id','ehostel_vendor_id','vendor_type','vendor_name','business_nature','tin_number','vendor_address','vendor_contact_number','supplier_name','supplier_contact_number','vendor_bank','vendor_bank_branch','vendor_bank_ifsc','vendor_account_number','supplier_aadhar_number'));
-			$crud->edit_fields(array('vendor_type', 'vendor_name','business_nature','tin_number','vendor_address','vendor_contact_number','supplier_name','supplier_contact_number','vendor_bank','vendor_bank_branch','vendor_bank_ifsc','vendor_account_number','supplier_aadhar_number'));
+			$crud->columns(array('vendor_type', 'vendor_name','business_nature',  'vendor_bank_ifsc',  'vendor_bank','vendor_bank_branch', 'vendor_account_number' ));
+			$crud->add_fields(array('school_id','ehostel_id','ehostel_vendor_id','vendor_type','vendor_name','business_nature','tin_number','vendor_address','vendor_bank_ifsc','supplier_name','supplier_contact_number','vendor_bank','vendor_bank_branch','vendor_bank_ifsc','vendor_account_number','supplier_aadhar_number'));
+			$crud->edit_fields(array('vendor_type', 'vendor_name','business_nature','tin_number','vendor_address','vendor_bank_ifsc','supplier_name','supplier_contact_number','vendor_bank','vendor_bank_branch','vendor_bank_ifsc','vendor_account_number','supplier_aadhar_number'));
 			$crud->required_fields(array('vendor_type', 'vendor_name','vendor_bank','vendor_bank_branch','vendor_bank_ifsc','vendor_account_number')); 
 			 
 			 $crud->set_rules('vendor_type','vendor type','required');

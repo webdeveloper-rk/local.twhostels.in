@@ -296,7 +296,10 @@ class Purchase_consumption extends MX_Controller {
 		$form_data['sn_price'] = $qp_data->session_3_price;	
 		$form_data['di_qty'] = $qp_data->session_4_qty;	
 		$form_data['di_price'] = $qp_data->session_4_price;	 
-		
+		if($item_id ==77)//rice item 
+		{
+			$school_id = -1999999;//to invalidate the result set to zero rowa
+		}
 		$data["vendor_details"] = $rs = $this->db->query("select * from tw_vendors where school_id=?",array($school_id));
         $data["form_data"] = $form_data;        
         $data["module"] = "purchase_consumption";        

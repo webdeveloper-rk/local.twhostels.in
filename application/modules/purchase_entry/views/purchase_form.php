@@ -67,8 +67,12 @@ if($errors !=""){
 					{
 						?><option <?php if($today_purchases->vendor_annapurna_id ==  $row->vendor_annapurna_id) {  echo " selected  "; }   ?>  value="<?php echo $row->vendor_annapurna_id;?>"><?php echo $row->vendor_name." - ".$row->supplier_name;?></option><?php 
 					}?>
+					<?php if($item_id ==77)//rice item 
+		{?>
 				   <option <?php if($today_purchases->vendor_annapurna_id ==  -2) {  echo " selected  "; }   ?>  value="-2">Civil supplies</option>
-				   </select>
+				  
+		<?php } ?>
+				  </select>
 				   <div><span>if you didn't find vendor in above list, Please  <a href='<?php echo site_url();?>vendors/entryform'>Click here</a> to add vendors.</span></div>
 				   <?php } else { ?><span style='color:#FF0000;font-weight:bold'><?php  echo $vendor_selected;?></span><?php  } ?>
 				   <div id="vendor_list" style="display:none">

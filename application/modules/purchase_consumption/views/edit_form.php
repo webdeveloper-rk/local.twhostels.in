@@ -90,8 +90,12 @@ if($errors !=""){
 					{
 						?><option <?php if($form_data['vendor_annapurna_id'] ==  $row->vendor_annapurna_id) {  echo " selected  "; }   ?>  value="<?php echo $row->vendor_annapurna_id;?>"><?php echo $row->vendor_name." - ".$row->supplier_name;?></option><?php 
 					}?>
+					<?php if($item_id ==77)//rice item 
+		{?>
+		
 					<option <?php if($form_data['vendor_annapurna_id'] ==  -2) {  echo " selected  "; }   ?>  value="-2">Civil Supplies</option>
-					</select>
+		<?php } ?>
+		</select>
 					 <br><br>
                   </div>
                 </div>

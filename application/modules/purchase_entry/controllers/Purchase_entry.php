@@ -235,9 +235,11 @@ class Purchase_entry extends MX_Controller {
 		
 		if($item_id ==77)//rice item 
 		{
-			$school_id = -1999999;//to invalidate the result set to zero rowa
-		}
+			$data["vendor_details"] = $rs = $this->db->query("select * from tw_vendors where school_id=? and vendor_type='central'",array($school_id));
+		}else
+		{
 		 $data["vendor_details"] = $rs = $this->db->query("select * from tw_vendors where school_id=?",array($school_id));
+		}
         $data["item_details"] = $rs = $this->db->query("select * from items where item_id=?",array($item_id))->row();
         $data["module"] = "purchase_entry"; 
 		

@@ -80,8 +80,8 @@ class Tsts_attendence extends MX_Controller {
 							$cat_2_total =  intval($school_attendence[$attObj->orgcode]['cat_2_total']);
 							$school_attendence[$attObj->orgcode]['cat_2_total']= $cat_2_total + $attObj->attempts;
 			}else if( $attObj->class>10){
-							$cat_3_total =  intval($school_attendence[$attObj->orgcode]['cat_3_total']);
-							$school_attendence[$attObj->orgcode]['cat_3_total']= $cat_3_total + $attObj->attempts;
+							//$cat_3_total =  intval($school_attendence[$attObj->orgcode]['cat_3_total']);
+							//$school_attendence[$attObj->orgcode]['cat_3_total']= $cat_3_total + $attObj->attempts;
 			}
 			
 			

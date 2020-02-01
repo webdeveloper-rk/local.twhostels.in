@@ -52,7 +52,7 @@ class Tsts_attendence extends MX_Controller {
 		 $total = 0 ;
 		 $cat_1_classes = array(1,2,3,4,5,6,7);
 		 $cat_2_classes = array(8,9,10);
-		 $cat_3_classes = array(11);
+		 $cat_3_classes = array();
 		 $att_list = $data_captured->txncount;
 		 
 		 //print_a($att_list);

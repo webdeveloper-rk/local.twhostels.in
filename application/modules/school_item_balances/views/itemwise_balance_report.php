@@ -27,23 +27,7 @@ if($errors !=""){
                   <label for="inputEmail3" class="col-sm-2 control-label">School Name:</label>
 
                   <div class="col-sm-10">
-				  <?php 
-				 
-				    $sid_selected = $this->input->post('school_id');?>
-                  <select name="school_id"  id="school_id"  required>
-						<option value="">Select School</option>
-						<?php 
-						$sid_selected = $this->input->post('school_id');
-						foreach($schools_list->result() as $schoolObj)
-						{
-							$selected_text = '';
-							if($sid_selected == $schoolObj->school_id){
-								$selected_text = ' selected ';
-							}
-						 ?>	
-						<option  <?php echo $selected_text ;?>   value="<?php echo $schoolObj->school_id;?>"><?php echo $schoolObj->school_code;?>-<?php echo $schoolObj->name;?></option>
-						<?php } ?>
-					</select>
+				    <?php echo  school_selection($this->input->post("school_id"));?>
                     
                   </div>
                 </div>

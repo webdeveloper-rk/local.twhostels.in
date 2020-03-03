@@ -489,6 +489,15 @@ if ( ! function_exists('school_selection'))
 			{ 
 				$school_rs = $ci_instance->db->query("SELECT s.school_id,s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s inner join districts d 
 													on d.district_id = s.district_id and s.name not like 'coll%' and is_school=1 order by school_code");	
+			
+				 
+				if($ci_instance->session->userdata("role_id")==12)//pos 
+							{
+								$logged_user_id= $ci_instance->session->userdata("user_id");
+								$school_rs = $ci_instance->db->query("SELECT s.school_id,s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s 
+											inner join districts d on d.district_id = s.district_id and s.name not like 'coll%' and d.district_id in( select district_id from po_districts where user_id=?) and is_school=1 order by school_code ",array($logged_user_id));	
+							}
+							 
 			}
 
 			else if( $ci_instance->session->userdata("district_id") >0 ) 
@@ -511,8 +520,21 @@ if ( ! function_exists('school_selection'))
 								
 					}
 					else{
-					$school_rs = $ci_instance->db->query("SELECT s.school_id,s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s 
+							if($ci_instance->session->userdata("role_id")==12)//pos 
+							{
+								$logged_user_id= $ci_instance->session->userdata("user_id");
+								$school_rs = $ci_instance->db->query("SELECT s.school_id,s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s 
+											inner join districts d on d.district_id = s.district_id and s.name not like 'coll%' and d.district_id in( select district_id from po_districts where user_id=?) and is_school=1 order by school_code ",array($logged_user_id));	
+							}
+							else {
+							
+							
+							$school_rs = $ci_instance->db->query("SELECT s.school_id,s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s 
 											inner join districts d on d.district_id = s.district_id and s.name not like 'coll%' and d.district_id=? and is_school=1 order by school_code ",array($district_id));	
+							}
+											
+											
+											
 					}
 
 			}

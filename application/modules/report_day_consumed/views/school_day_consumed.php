@@ -21,31 +21,7 @@
 
                   <div class="col-sm-10">
 				  
-				  	  <select name="school_code" id="school_code" required >
-				  <option value=''>Select School </option>
-				    <?php 
-					 			$uid  = $this->session->userdata("user_id");
-					$district_id  = $this->session->userdata("district_id");
-					if($this->session->userdata("is_dco")==0)
-					{
-										$school_rs = $this->db->query("SELECT s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s inner join districts d on d.district_id = s.district_id and s.is_school='1'   and s.school_code not like '%85000%' order by school_code asc ");	
-					}
-					else
-					{
-											//$school_rs = $this->db->query("select * from schools where district_id='$district_id' and name not like 'coll%' ");
-											$school_rs = $this->db->query("SELECT s.name as sname,d.name as dname ,school_code ,d.district_id FROM schools s inner join districts d on d.district_id = s.district_id and    s.is_school='1' and s.school_code not like '%85000%' and d.district_id='$district_id' order by school_code asc ");	
-					}
-					$selected_school_code = $this->input->post("school_code");
-					$selected_text = '';
-					foreach($school_rs->result() as $row)
-					{
-						if($selected_school_code == $row->school_code)
-							$selected_text = ' selected ';
-						echo "<option value='".$row->school_code."' $selected_text >".$row->school_code."-" .$row->sname." - ".$row->dname."</option>" ;
-						$selected_text = '';
-					}
-			 ?>
-                    </select>
+				   <?php echo  school_selection($this->input->post("school_id"));?>
 				  
 				 
                   </div>

@@ -70,6 +70,16 @@ class Missed_entries extends MX_Controller {
 						
 						
 		}
+		
+		
+		if($this->session->userdata("role_id")==12)//pos 
+							{
+								$logged_user_id= $this->session->userdata("user_id");
+								$condition_dco =  " and sc.district_id in ( select district_id from po_districts where user_id='$logged_user_id')  ";	
+							}
+		
+		
+		
 			$balance_sheet_table = $this->common_model->get_stock_entry_table($report_date);
 			
 		  $sql = "select sc.school_id,sc.school_code,sc.name , sc.district_name ,sc.is_school,t1.total_purchase,t1.total_qty from schools sc left join 
@@ -79,7 +89,7 @@ class Missed_entries extends MX_Controller {
 			where sc.is_school=1 and t1.total_purchase is NULL and t1.total_qty is NULL and sc.school_code not like '%85000%' $condition_dco order by sc.district_name,sc.school_code 
 		  ";
 		$rs  = $this->db->query($sql,array($report_date));
-		//  echo $this->db->last_query();die;
+		 // echo $this->db->last_query();die;
 		
 		$report_date_formated = date('d-m-Y',strtotime($report_date));
 		

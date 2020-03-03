@@ -34,15 +34,18 @@ class Report_day_consumed extends MX_Controller {
 		  
 		if($this->form_validation->run() == true )
 		{
-			if(!chk_date_format($this->input->post('school_date')))
+			//print_a($_POST,1);
+			/*if(!chk_date_format($this->input->post('school_date')))
 			{
 				$this->session->set_flashdata('message', '<div class="alert alert-danger">Invalid Date format. ex: mm/dd/YYYY</div>');
 				redirect('report_day_consumed');
 			}
-			else
+			else*/
 			{
 					 $school_date = date('Y-m-d',strtotime($this->input->post('school_date')));
+					  
 				 	$valid_date = $this->db->query("select (? between '2017-01-01' and CURRENT_DATE) as valid_date " ,array($school_date))->row()->valid_date;
+					 
 					if($valid_date == 0)
 					{
 						$this->session->set_flashdata('message', '<div class="alert alert-danger">Invalid Date  '.date('d-M-Y',strtotime($school_date)).'. Date should not be Future date.</div>');
@@ -65,12 +68,13 @@ class Report_day_consumed extends MX_Controller {
 		$today_remaining_Amount = '0.00';
 		$data['result_flag']			  =  0;
 		if($this->session->userdata("user_role")=="subadmin"){
-				if($this->input->post('school_code')!="")
+				if($this->input->post('school_id')!="")
 				 {
-					 $school_code = $this->input->post('school_code');
+					 $school_id = $this->input->post('school_id');
 					 
 					 
-					 $srs = $this->db->query("select * from schools where school_code=?",array($school_code));
+					 $srs = $this->db->query("select * from schools where  school_id =?",array($school_id));
+					 //echo $this->db->last_query();
 					 $school_data = $srs->row();
 					 $data['school_info'] =  $school_data;
 					 $school_id = $school_data->school_id;		
@@ -119,7 +123,7 @@ class Report_day_consumed extends MX_Controller {
 		foreach($price_rs->result() as $stu_price){
 			$student_prices[$stu_price->group_code] = $stu_price->amount;
 		}
-		
+		//print_a($student_prices);
 
 		/******get attendence ******/
 			

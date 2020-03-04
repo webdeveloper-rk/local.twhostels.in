@@ -14,6 +14,7 @@ class Purchase_consumption extends MX_Controller {
 			$this->load->config("config.php");
 			$this->load->library("ci_jwt");
 			$this->load->model("common/common_model");
+			$this->load->model("locks/locks_model");
 			 $this->load->library("assignschools/assigned_schools");
 			
 			//check_permission('admin_day_entries');
@@ -182,12 +183,14 @@ class Purchase_consumption extends MX_Controller {
 		
 		
 		
-		$locked_status = $this->db->query("select ? <= lock_date as locked_status from lock_balancesheet where status='1'",array($date))->row()->locked_status;
+		//$locked_status = $this->db->query("select ? <= lock_date as locked_status from lock_balancesheet where status='1'",array($date))->row()->locked_status;
+		$locked_status = $this->locks_model->is_locked("balance_sheet", $date);
 		if($locked_status==1)
 		{
+			$locked_date = $this->locks_model->locked_date("balance_sheet");
 			send_json_result([
                 'success' =>  false ,
-                'message' => '<div class="alert alert-danger">Failed to update. Date Locked.</div>'  
+                'message' => '<div class="alert alert-danger">Failed to update. Date Locked to '.$locked_date.'.</div>'  
             ] );  
 			die;
 		}

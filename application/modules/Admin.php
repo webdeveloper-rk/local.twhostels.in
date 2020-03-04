@@ -23,7 +23,6 @@ class Admin extends MX_Controller {
 		$this->load->helper('url');
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ci_jwt');
-		$this->load->model('locks/locks_model');
 	 
 	}
 
@@ -85,28 +84,6 @@ class Admin extends MX_Controller {
 		
 		try{
 			$crud = new grocery_CRUD($this);
-			
-			$state = $crud->getState();
-			$state_info = $crud->getStateInfo();
-			if($state=="update_validation")
-			{
-				 $primary_key = $state_info->primary_key ;
-				 $att_date = $this->db->query("select * from school_attendence where attendence_id=?",array($primary_key))->row()->entry_date;
-				  
-				  $locked_status = $this->locks_model->is_locked("attendance", $att_date);
-				   
-				 if($locked_status==1)
-				 {
-					  $locked_date = $this->locks_model->locked_date("attendance");
-						 send_json_result([
-											'success' =>  FALSE ,
-											'error_message' => ' Attendance entries Locked to '.$locked_date.'.', 
-											'error_fields' => '' 
-										]);  
-				 }
-				  
-			}
-
 			 
 			$crud->set_theme('flexigrid'); 
 			$crud->set_table('school_attendence');
@@ -127,25 +104,25 @@ class Admin extends MX_Controller {
 			if(  in_array($school_code,$cat3_school_codes))
 			{
 				$crud->columns(array('entry_date','present_count','cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence','cat3_attendence'));
-				$crud->edit_fields('entry_date','cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence','cat3_attendence');
+				$crud->edit_fields('cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence','cat3_attendence');
 			}
 			else{
 				 
 				$crud->columns(array('entry_date','present_count','cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence' ));
-				 $crud->edit_fields('entry_date','cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence' );
+				 $crud->edit_fields('cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence' );
 			}
-			$crud->required_fields('cat1_attendence','cat1_guest_attendence','cat2_attendence','cat2_guest_attendence');
+			
 			
 			 $edit_check = $this->db->query("select * from attendance_months_locks where month=? and year=? and admin_locked_status='locked'",array(intval($month),$year));
 						if($edit_check->num_rows()>0)
 						{
-							//$crud->unset_edit(); 
+							$crud->unset_edit(); 
 						} 
 						//before october 1st also remove edit option 
 						$low_date = $this->db->query("select  ? < '2019-10-01' as low_date ",array($first_date))->row()->low_date;
 						if($low_date==1)
 						{
-							//$crud->unset_edit(); 
+							$crud->unset_edit(); 
 						} 
 						
 			$crud->unset_add(); 

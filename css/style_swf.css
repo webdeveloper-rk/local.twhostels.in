@@ -192,10 +192,11 @@ a.top:hover{font-size:17px; font-stretch:normal; font-variant:normal; text-align
   display: block;
   width: 100%;
   height: 31px;
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight:bolder;
   line-height: 1.42857143;
-  color: #555555;
+  color: #000;
   background-color: #ffffff;
   background-image: none;
   border: 1px solid #cccccc;
@@ -215,28 +216,28 @@ a.top:hover{font-size:17px; font-stretch:normal; font-variant:normal; text-align
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
 .form-control::-webkit-input-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control:-moz-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control::-moz-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control:-ms-input-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control:-moz-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control::-moz-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control:-ms-input-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control::-webkit-input-placeholder {
-  color: #aaaaaa;
+  color: #bbb;
 }
 .form-control[disabled],
 .form-control[readonly],

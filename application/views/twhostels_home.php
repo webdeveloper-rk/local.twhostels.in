@@ -6,33 +6,49 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>:: TWHOSTELS.IN ::</title>
 
+
+<script language="javascript">
+	var msg = ":: TWHOSTELS.IN | Annapurna Diet Menu Monitoring Application ::";
+	var pos = 0;
+	var spacer = " :: ";
+	var time_length = 300;
+	function ScrollTitle() {
+		document.title = msg.substring(pos, msg.length) + spacer
+				+ msg.substring(0, pos);
+		pos++;
+		if (pos > msg.length)
+			pos = 0;
+		window.setTimeout("ScrollTitle()", time_length);
+	}
+	ScrollTitle();
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 
 <!--
 
 body {
-
 	margin-left: 0px;
-
 	margin-top: 0px;
-
 	margin-right: 0px;
-
 	margin-bottom: 0px;
-
-	background-color:#ccc;
-
+	background-color:#ddd;
 	font-family:Arial, Helvetica, sans-serif;
-
-	 
-
 	background-repeat:repeat;
-
+	background-image: url(<?php echo site_url();?>images/wine-pattern-repeating-bg.png);
 }
 
 -->
+.loginh1{
+background-color:#FFCC66;
+font:Georgia, "Times New Roman", Times, serif;
+padding:5px;
+font-size:24px;
+font-weight:bold;
+}
+
 
 .alert-danger {
 
@@ -98,6 +114,16 @@ box-shadow: 0px 12px 12px #222;
 
 
 
+
+<link rel="stylesheet" href="styles.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="script.js"></script>
+
+
+
+
+
+
 <script type="text/javascript" src="<?php echo site_url();?>js/jquery-1.2.6.min.js"></script>
 
 <script type="text/javascript" src="<?php echo site_url();?>slideshow.js"></script>
@@ -116,12 +142,11 @@ box-shadow: 0px 12px 12px #222;
 
   <tr>
 
-    <td align="center"><table width="1020" border="0" align="center" cellpadding="0" cellspacing="0"  class="boxshadow">
+    <td align="center" background="<?php echo site_url();?>images/wine-pattern-repeating-bg.png"><table width="1020" border="0" align="center" cellpadding="0" cellspacing="0"  class="boxshadow">
 
   <tr>
 
-    <td height="5" bgcolor="#000000"></td>
-
+    <td height="5" bgcolor="#000"></td>
   </tr>
 
   <tr>
@@ -130,12 +155,10 @@ box-shadow: 0px 12px 12px #222;
 
       <tr>
 
-        <td height="120" align="left" bgcolor="#FFFFFF"><img src="<?php echo site_url();?>images/logo.jpg" width="1024"   /></td>
-
+        <td align="center" bgcolor="#FFFFFF"><img src="<?php echo site_url();?>images/logo.jpg"   /></td>
       </tr>
 
     </table></td>
-
   </tr>
 
   
@@ -149,21 +172,25 @@ box-shadow: 0px 12px 12px #222;
    
 
       <tr>
+        <td align="center" bgcolor="#FFFFFF"><div id='cssmenu'>
+<ul>
+   <li class='active'><a href='<?php echo site_url();?>'><span>Home</span></a></li>
+   <li><a href='<?php echo site_url();?>twhostels_helpdocument.pdf' target="_blank"><span>Help Document</span></a></li>
+   <li><a href='https://twhostels.cgg.gov.in/' target="_blank"><span>E-Hostel Portal</span></a></li>
+   <li class='last'><a href='<?php echo site_url();?>enquiry'><span>Contact Us</span></a></li>
+</ul>
+</div></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#eeeeee" style="padding:10px;"><h3> Support Email : <span style="color:#FF0000;font-weight:bold;">twhostelsitcell@gmail.com</span> | Contact : <span style="color:#FF0000;font-weight:bold;">Vinod Joshi</span> | Mobile : <span style="color:#FF0000;font-weight:bold;"> 9848888795</span></h3></td>
+      </tr>
+      <tr>
 
         <td align="center" bgcolor="#FFFFFF"><table width="99%" cellspacing="0" cellpadding="0">
 
           <tr>
-            <td colspan="2" align="center" valign="top" >&nbsp;</td>
-          </tr>
-          <tr>
-            <td colspan="2" align="left" valign="top" bgcolor="#eeeeee" style="padding:10px;"><h3> Support Email : <span style="color:#FF0000;font-weight:bold;">twhostelsitcell@gmail.com</span> | Contact : <span style="color:#FF0000;font-weight:bold;">Vinod Joshi</span> | Mobile : <span style="color:#FF0000;font-weight:bold;"> 9848888795</span></h3></td>
-          </tr>
-          <tr>
-            <td colspan="2" align="center" valign="top" > <h3>&nbsp;</h3></td>
-            </tr>
-          <tr>
 
-            <td align="center" valign="top" bgcolor="#FFFFCC" ><table width="320" cellspacing="0" cellpadding="0">
+            <td align="right" valign="top" ><table width="315" cellspacing="0" cellpadding="0">
 
               <tr>
 
@@ -176,9 +203,7 @@ box-shadow: 0px 12px 12px #222;
 
                     <tr>
 
-                      <td width="4" align="left" valign="middle"><img src="<?php echo site_url();?>images_swf/login-icon.jpg" width="14" height="14" /></td>
-
-                      <td align="left"  class="main-headings">TWHOSTELS Login </td>
+                      <td align="left"  class="loginh1"><span> <i class="fa fa-lock"> </i> Official Login</span></td>
                     </tr>
 
                 </table></td>
@@ -197,7 +222,8 @@ box-shadow: 0px 12px 12px #222;
               <tr>
 
                 <td align="left" valign="top">
-
+<?php if(date('d-m-Y') =="23-09-2019") {  echo "<h3>Under maintenance upto  24th sep 2019 6 AM.</h3>";} ?> 	 
+<?php if(date('d-m-Y') !="23-09-2019") { ?>		
 				<form method="post" role="form" id="main_form" action="<?php echo site_url('admin/login');?>">
 
 				
@@ -206,7 +232,7 @@ box-shadow: 0px 12px 12px #222;
                 
                
 
-					<h4>Please use DDO Code to Login.</h4>
+					<h5>Please use DDO Code to Login.</h5>
 
 					<div class="input-group">
 
@@ -266,18 +292,10 @@ box-shadow: 0px 12px 12px #222;
 
 			 <div id="notifier"></div>
  
-				<div><a  style="
-    background-color: #2A7FFF;
-    padding: 9px;
-    color: #FFFFFF;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-" target="_blank" href="http://twhostels.in/twhostels_help.pdf"><!--user_manual_new.PDF--><strong>Hwo / Hm User Manual Telugu</strong></a></div>
+				
 			</form>
 
-			
+<?php } ?>
 
 		
 
@@ -294,8 +312,8 @@ box-shadow: 0px 12px 12px #222;
                 
                 
                 
-                <br /> <br />
-                <h4>Applicatio Demo Video</h4>
+                
+                <h4>Application Demo</h4>
                 
                 <iframe width="100%" height="275" src="https://www.youtube.com/embed/GK1w1iX0UlM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </td>
               </tr>
@@ -357,7 +375,7 @@ box-shadow: 0px 12px 12px #222;
                             <tr>
 
                               <td align="left" valign="top" class="main-content" style="line-height:28PX;">
-										  Menu Monitoring Software is used across Telengana Social Welfare & Tribal  Welfare Department. This software helps to update and track the complete Food Provisional Items, Monthly Indent Generation, Approved Tenderer, Daily Consumption Report and Students Attendance information. Every school updates menu issue and perishable items issues Four times a day i.e at 1. Breakfast 2.Lunch 3. Supper 4. Snacks. Reports are generated based on the above data at school, district and Head office level, these reports help in ensuring the quality of food supplied. We can also know consumption history, purchase history, opening balance and closing balance at any given instance                            </td>
+										 Menu Monitoring software is used in Tribal Welfare Dept. institutions and in TTWREIS. This software helps to update and track the complete Food Provisional Items, Monthly Indent Generation, Approved Tenderer, Daily Consumption Report and Students Attendance information. Every school updates menu issue and perishable items issues Four times a day i.e at 1. Breakfast 2.Lunch 3. Supper 4. Snacks. Reports are generated based on the above data at school, district and Head office level, these reports help in ensuring the quality of food supplied. We can also know consumption history, purchase history, opening balance and closing balance at any given instance                            </td>
                             </tr>
 
                             
@@ -424,13 +442,11 @@ box-shadow: 0px 12px 12px #222;
           </tr>
 
         </table></td>
-
       </tr>
 
       <tr>
 
         <td bgcolor="#FFFFFF">&nbsp;</td>
-
       </tr>
 
     </table></td>
@@ -439,7 +455,8 @@ box-shadow: 0px 12px 12px #222;
 
   <tr>
 
-    <td height="30" align="center" bgcolor="#000000" class="footerxt">© Copyright TWHOSTELS</td>
+    <td height="30" align="center" bgcolor="#000000" class="footerxt">Copyright © 2020 Tribal Welfare Department | All Rights Reserved
+All Rights Reserved</td>
 
   </tr>
 

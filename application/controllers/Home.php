@@ -24,15 +24,9 @@ class Home extends CI_Controller {
 			if ($this->session->userdata("is_loggedin") == TRUE   ) {
 							redirect("admin");
 			}
-			else {
-					if($this->config->item("twhostels")==""){			
-						$this->load->view('twhostels_home'); 
-							
-					}
-					else{
-						$this->load->view('home');
-					}
-			}
+			 $this->load->view('twhostels_home'); 
+				 
+			 
 	}
 	function landing()
 	{

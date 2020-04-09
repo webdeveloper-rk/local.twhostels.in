@@ -120,7 +120,7 @@ box-shadow: 0px 12px 12px #222;
 
   <tr>
 
-    <td height="5" bgcolor="#000000"></td>
+    <td height="5" bgcolor="#0A8B31"></td>
 
   </tr>
 
@@ -130,7 +130,7 @@ box-shadow: 0px 12px 12px #222;
 
       <tr>
 
-        <td height="120" align="left" bgcolor="#FFFFFF"><img src="<?php echo site_url();?>images/logo.jpg" width="1024"   /></td>
+        <td height="120" align="center" bgcolor="#FFFFFF"><img src="<?php echo site_url();?>images/logo.jpg"   /></td>
 
       </tr>
 
@@ -193,7 +193,8 @@ box-shadow: 0px 12px 12px #222;
               <tr>
 
                 <td align="left" valign="top">
-
+<?php if(date('d-m-Y') =="23-09-2019") {  echo "<h1>Under maintenance upto  24th sep 2019 6 AM</h1>";} ?> 	 
+<?php if(date('d-m-Y') !="23-09-2019") { ?>		
 				<form method="post" role="form" id="main_form" action="<?php echo site_url('admin/login');?>">
 
 				

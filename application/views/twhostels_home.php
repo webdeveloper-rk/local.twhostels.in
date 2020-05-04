@@ -174,10 +174,11 @@ box-shadow: 0px 12px 12px #222;
       <tr>
         <td align="center" bgcolor="#FFFFFF"><div id='cssmenu'>
 <ul>
-   <li class='active'><a href='<?php echo site_url();?>'><span>Home</span></a></li>
-   <li><a href='<?php echo site_url();?>twhostels_helpdocument.pdf' target="_blank"><span>Help Document</span></a></li>
+   <li class='active'><a href='https://twhostels.in/'><span>Home</span></a></li>
+   <li><a href='https://twhostels.in/twhostels_helpdocument.pdf' target="_blank"><span>Help Document</span></a></li>
    <li><a href='https://twhostels.cgg.gov.in/' target="_blank"><span>E-Hostel Portal</span></a></li>
-   <li class='last'><a href='<?php echo site_url();?>enquiry'><span>Contact Us</span></a></li>
+   <li><a href='https://twhostels.in/crt/' target="_blank"><span>CRT Portal</span></a></li>
+   <li class='last'><a href='https://twhostels.in/enquiry'><span>Contact Us</span></a></li>
 </ul>
 </div></td>
       </tr>

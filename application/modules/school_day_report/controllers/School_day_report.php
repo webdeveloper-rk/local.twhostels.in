@@ -128,6 +128,9 @@ class School_day_report extends MX_Controller {
    
    function display_menu()
    {
+	    $file_path = $this->db->query("select * from menu_pic where status='1' ")->row()->menu_pic_path;
+		
+		$data["menu_pic_path"] = site_url()."assets/uploads/menu_pic/".$file_path;
 		$data["module"] = "school_day_report";
         $data["view_file"] = "menu_pic";
         echo Modules::run("template/admin", $data);

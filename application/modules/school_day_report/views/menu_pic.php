@@ -4,6 +4,6 @@
               <h3 class="box-title">Menu</h3>
             </div>
             <!-- /.box-header -->
-            <!-- form start -->              <div class="box-body table-responsive">					<img src="<?php echo site_url();?>images/menu.jpg" width="900px;">
+            <!-- form start -->              <div class="box-body table-responsive">					<img src="<?php echo $menu_pic_path;?>" width="900px;">
 				                  </div></div>
 </section>

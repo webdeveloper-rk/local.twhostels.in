@@ -1,0 +1,170 @@
+<?php 
+if(isset($_POST))
+{
+	$con12e = mysqli_connect("localhost","root","","dummy"); 
+	
+	
+	$postdata = $_POST;
+	foreach($postdata as $key=>$pdata)
+	{
+		$_POST[$key]= trim($pdata);
+		//Exclude some posted varibales checkings 
+		$exclude_variables = array('password','consumptionprime','newpwd','cpwd','oldpwd');
+		if(in_array($key,$exclude_variables))
+		{
+			
+			$_POST[$key]= mysqli_escape_string($con12e,$_POST[$key]);
+			continue;
+		}
+		
+		
+		
+		if(is_array($pdata))
+		{
+			foreach($pdata as $pkey=>$inlinedata)
+			{
+				 if(!is_date($inlinedata)){
+					 check_all($inlinedata);
+				 }
+			}
+		}
+		else
+		{
+			if(!is_date($pdata)){
+					 check_all($pdata);
+				 }
+			  
+		} 
+		
+				
+		
+		
+			
+			// Last Mysql Escape String with Dummy connection 
+			
+			if (mysqli_connect_errno())
+			{
+					echo "Failed to connect to Database. "  ;
+					die;
+			}
+			//Over write Posted value with escaped string 
+			$_POST[$key]= mysqli_escape_string($con12e,$_POST[$key]);
+			
+	}
+		mysqli_close($con12e);	
+} 
+function is_date($date_string)
+{
+	if (1 !== preg_match('#^([0-9]{1,2})\\/([0-9]{1,2})\\/([0-9]{4})$#', $date_string)) 
+		{
+				return false;
+		}else{
+		return true;
+		}
+	
+}
+function check_all($str)
+{
+
+		check_word_count($str);
+		check_injection_words($str);
+}
+function check_word_count($str)
+{
+	
+			 $cnt = str_word_count($str); 
+			//echo $str;echo  $cnt;die;
+			  
+			 if($cnt >3)
+			 {
+				 redirect_page();
+			 }
+}
+function check_injection_words($str)
+{
+			$mysql_words = array('ACCESSIBLE','ACCOUNT','ACTION','ADD','ADMIN','AFTER','AGAINST','AGGREGATE','ALGORITHM','ALL','ALTER','ALWAYS','ANALYSE','ANALYZE','AND','ANY','AS','ASC','ASCII','ASENSITIVE','AT','AUTO_INCREMENT','AUTOEXTEND_SIZE','AVG','AVG_ROW_LENGTH','BACKUP','BEFORE','BEGIN','BETWEEN','BIGINT','BINARY','BINLOG','BIT','BLOB','BLOCK','BOOL','BOOLEAN','BOTH','BTREE','BUCKETS','BY','BYTE','CACHE','CALL','CASCADE','CASCADED','CASE','CATALOG_NAME','CHAIN','CHANGE','CHANGED','CHANNEL','CHAR','CHARACTER','CHARSET','CHECK','CHECKSUM','CIPHER','CLASS_ORIGIN','CLIENT','CLONE','CLOSE','COALESCE','CODE','COLLATE','COLLATION','COLUMN','COLUMN_FORMAT','COLUMN_NAME','COLUMNS','COMMENT','COMMIT','COMMITTED','COMPACT','COMPLETION','COMPONENT','COMPRESSED','COMPRESSION','CONCURRENT','CONDITION','CONNECTION','CONSISTENT','CONSTRAINT','CONSTRAINT_CATALOG','CONSTRAINT_NAME','CONSTRAINT_SCHEMA','CONTAINS','CONTEXT','CONTINUE','CONVERT','CPU','CREATE','CROSS','CUBE','CUME_DIST','CURRENT','CURRENT_DATE','CURRENT_TIME','CURRENT_TIMESTAMP','CURRENT_USER','CURSOR','CURSOR_NAME','DATABASE','DATABASES','DATAFILE','DATETIME','DAY','DAY_HOUR','DAY_MICROSECOND','DAY_MINUTE','DAY_SECOND','DEALLOCATE','DEC','DECIMAL','DECLARE','DEFAULT','DEFAULT_AUTH','DEFINER','DEFINITION','DELAY_KEY_WRITE','DELAYED','DELETE','DENSE_RANK','DES_KEY_FILE','DESC','DESCRIBE','DESCRIPTION','DETERMINISTIC','DIAGNOSTICS','DIRECTORY','DISABLE','DISCARD','DISK','DISTINCT','DISTINCTROW','DIV','DOUBLE','DROP','DUAL','DUMPFILE','DUPLICATE','DYNAMIC','EACH','ELSE','ELSEIF','EMPTY','ENABLE','ENCLOSED','ENCRYPTION','END','ENDS','ENGINE','ENGINES','ENUM','ERROR','ERRORS','ESCAPE','ESCAPED','EVENT','EVENTS','EVERY','EXCEPT','EXCHANGE','EXCLUDE','EXECUTE','EXISTS','EXIT','EXPANSION','EXPIRE','EXPLAIN','EXPORT','EXTENDED','EXTENT_SIZE','FALSE','FAST','FAULTS','FETCH','FIELDS','FILE','FILE_BLOCK_SIZE','FILTER','FIRST','FIRST_VALUE','FIXED','FLOAT','FLOAT4','FLOAT8','FLUSH','FOLLOWING','FOLLOWS','FOR','FORCE','FOREIGN','FORMAT','FOUND','FROM','FULL','FULLTEXT','FUNCTION','GENERAL','GENERATED','GEOMCOLLECTION','GEOMETRY','GEOMETRYCOLLECTION','GET_FORMAT','GET_MASTER_PUBLIC_KEY','GLOBAL','GRANT','GRANTS','GROUP','GROUP_REPLICATION','GROUPING','GROUPS','HANDLER','HASH','HAVING','HIGH_PRIORITY','HISTOGRAM','HISTORY','HOST','HOSTS','HOUR','HOUR_MICROSECOND','HOUR_MINUTE','HOUR_SECOND','IDENTIFIED','IGNORE','IGNORE_SERVER_IDS','IMPORT','IN','INDEX','INDEXES','INFILE','INITIAL_SIZE','INNER','INOUT','INSENSITIVE','INSERT','INSERT_METHOD','INSTALL','INSTANCE','INT','INT1','INT2','INT3','INT4','INT8','INTEGER','INTERVAL','INTO','INVISIBLE','INVOKER','IO','IO_AFTER_GTIDS','IO_BEFORE_GTIDS','IO_THREAD','IPC','ISOLATION','ISSUER','ITERATE','JOIN','JSON','JSON_TABLE','KEY','KEY_BLOCK_SIZE','KEYS','KILL','LAG','LANGUAGE','LAST','LAST_VALUE','LEAD','LEADING','LEAVE','LEAVES','LEFT','LESS','LEVEL','LIKE','LIMIT','LINEAR','LINES','LINESTRING','LIST','LOAD','LOCAL','LOCALTIME','LOCALTIMESTAMP','LOCK','LOCKED','LOCKS','LOGFILE','LOGS','LONG','LONGBLOB','LONGTEXT','LOOP','LOW_PRIORITY','MASTER','MASTER_AUTO_POSITION','MASTER_BIND','MASTER_CONNECT_RETRY','MASTER_DELAY','MASTER_HEARTBEAT_PERIOD','MASTER_HOST','MASTER_LOG_FILE','MASTER_LOG_POS','MASTER_PASSWORD','MASTER_PORT','MASTER_PUBLIC_KEY_PATH','MASTER_RETRY_COUNT','MASTER_SERVER_ID','MASTER_SSL','MASTER_SSL_CA','MASTER_SSL_CAPATH','MASTER_SSL_CERT','MASTER_SSL_CIPHER','MASTER_SSL_CRL','MASTER_SSL_CRLPATH','MASTER_SSL_KEY','MASTER_SSL_VERIFY_SERVER_CERT','MASTER_TLS_VERSION','MASTER_USER','MATCH','MAX_CONNECTIONS_PER_HOUR','MAX_QUERIES_PER_HOUR','MAX_ROWS','MAX_SIZE','MAX_UPDATES_PER_HOUR','MAX_USER_CONNECTIONS','MAXVALUE','MEDIUM','MEDIUMBLOB','MEDIUMINT','MEDIUMTEXT','MEMORY','MERGE','MESSAGE_TEXT','MICROSECOND','MIDDLEINT','MIGRATE','MIN_ROWS','MINUTE','MINUTE_MICROSECOND','MINUTE_SECOND','MOD','MODE','MODIFIES','MODIFY','MONTH','MULTILINESTRING','MULTIPOINT','MULTIPOLYGON','MUTEX','MYSQL_ERRNO','NAME','NAMES','NATIONAL','NATURAL','NCHAR','NDB','NDBCLUSTER','NESTED','NEVER','NEW','NEXT','NO','NO_WAIT','NO_WRITE_TO_BINLOG','NODEGROUP','NONE','NOT','NOWAIT','NTH_VALUE','NTILE','NULL','NULLS','NUMBER','NUMERIC','NVARCHAR','OF','OFFSET','ON','ONE','ONLY','OPEN','OPTIMIZE','OPTIMIZER_COSTS','OPTION','OPTIONAL','OPTIONALLY','OPTIONS','OR','ORDER','ORDINALITY','ORGANIZATION','OTHERS','OUT','OUTER','OUTFILE','OVER','OWNER','PACK_KEYS','PAGE','PARSER','PARTIAL','PARTITION','PARTITIONING','PARTITIONS','PASSWORD','PATH','PERCENT_RANK','PERSIST','PERSIST_ONLY','PHASE','PLUGIN','PLUGIN_DIR','PLUGINS','POINT','POLYGON','PORT','PRECEDES','PRECEDING','PRECISION','PREPARE','PRESERVE','PREV','PRIMARY','PRIVILEGES','PROCEDURE','PROCESS','PROCESSLIST','PROFILE','PROFILES','PROXY','PURGE','QUARTER','QUERY','QUICK','RANGE','RANK','READ','READ_ONLY','READ_WRITE','READS','REAL','REBUILD','RECOVER','RECURSIVE','REDO_BUFFER_SIZE','REDOFILE','REDUNDANT','REFERENCE','REFERENCES','REGEXP','RELAY','RELAY_LOG_FILE','RELAY_LOG_POS','RELAY_THREAD','RELAYLOG','RELEASE','RELOAD','REMOTE','REMOVE','RENAME','REORGANIZE','REPAIR','REPEAT','REPEATABLE','REPLACE','REPLICATE_DO_DB','REPLICATE_DO_TABLE','REPLICATE_IGNORE_DB','REPLICATE_IGNORE_TABLE','REPLICATE_REWRITE_DB','REPLICATE_WILD_DO_TABLE','REPLICATE_WILD_IGNORE_TABLE','REPLICATION','REQUIRE','RESET','RESIGNAL','RESOURCE','RESPECT','RESTART','RESTORE','RESTRICT','RESUME','RETURN','RETURNED_SQLSTATE','RETURNS','REUSE','REVERSE','REVOKE','RIGHT','RLIKE','ROLE','ROLLBACK','ROLLUP','ROTATE','ROUTINE','ROW','ROW_COUNT','ROW_FORMAT','ROW_NUMBER','ROWS','RTREE','SAVEPOINT','SCHEDULE','SCHEMA','SCHEMA_NAME','SCHEMAS','SECOND','SECOND_MICROSECOND','SECONDARY_ENGINE','SECONDARY_LOAD','SECONDARY_UNLOAD','SECURITY','SELECT','SENSITIVE','SEPARATOR','SERIAL','SERIALIZABLE','SERVER','SESSION','SET','SHARE','SHOW','SHUTDOWN','SIGNAL','SIGNED','SIMPLE','SKIP','SLAVE','SLOW','SMALLINT','SNAPSHOT','SOCKET','SOME','SONAME','SOUNDS','SOURCE','SPATIAL','SPECIFIC','SQL','SQL_AFTER_GTIDS','SQL_AFTER_MTS_GAPS','SQL_BEFORE_GTIDS','SQL_BIG_RESULT','SQL_BUFFER_RESULT','SQL_CACHE','SQL_CALC_FOUND_ROWS','SQL_NO_CACHE','SQL_SMALL_RESULT','SQL_THREAD','SQL_TSI_DAY','SQL_TSI_HOUR','SQL_TSI_MINUTE','SQL_TSI_MONTH','SQL_TSI_QUARTER','SQL_TSI_SECOND','SQL_TSI_WEEK','SQL_TSI_YEAR','SQLEXCEPTION','SQLSTATE','SQLWARNING','SRID','SSL','STACKED','START','STARTING','STARTS','STATS_AUTO_RECALC','STATS_PERSISTENT','STATS_SAMPLE_PAGES','STATUS','STOP','STORAGE','STORED','STRAIGHT_JOIN','STRING','SUBCLASS_ORIGIN','SUBJECT','SUBPARTITION','SUBPARTITIONS','SUPER','SUSPEND','SWAPS','SWITCHES','SYSTEM','TABLE','TABLE_CHECKSUM','TABLE_NAME','TABLES','TABLESPACE','TEMPORARY','TEMPTABLE','TERMINATED','TEXT','THAN','THEN','THREAD_PRIORITY','TIES','TIME','TIMESTAMP','TIMESTAMPADD','TIMESTAMPDIFF','TINYBLOB','TINYINT','TINYTEXT','TO','TRAILING','TRANSACTION','TRIGGER','TRIGGERS','TRUE','TRUNCATE','TYPE','TYPES','UNBOUNDED','UNCOMMITTED','UNDEFINED','UNDO','UNDO_BUFFER_SIZE','UNDOFILE','UNICODE','UNINSTALL','UNION','UNIQUE','UNKNOWN','UNLOCK','UNSIGNED','UNTIL','UPDATE','UPGRADE','USAGE','USE','USE_FRM','USER','USER_RESOURCES','USING','UTC_DATE','UTC_TIME','UTC_TIMESTAMP','VALIDATION','VALUE','VALUES','VARBINARY','VARCHAR','VARCHARACTER','VARIABLES','VARYING','VCPU','VIEW','VIRTUAL','VISIBLE','WAIT','WARNINGS','WEEK','WEIGHT_STRING','WHEN','WHERE','WHILE','WINDOW','WITH','WITHOUT','WORK','WRAPPER','WRITE','X509','XA','XID','XML','XOR','YEAR','YEAR_MONTH','ZEROFILL');
+			$mysql_words[] = "MYSQL_QUERY";
+			$mysql_words[] = "MYSQLI_QUERY";
+			$mysql_words[] = "PHP";
+			$mysql_words[] = "<?php";
+			$ddl_words = array("ALTER","DROP","SELECT","INSERT","UPDATE","DELETE","CREATE","UNION","JOIN");
+			$dbtables = array('attendence_log','balance_sheet','caretaker_confirmation','class_student_strengths','cms','cronjobs','dco_contacts','districts','district_prices','fixed_rates','food_sessions','group_prices','holidays','indendent_sch_strength','items','item_approvals','item_per_head','item_today_balances','login_sessions','purchase_bills','revenue_divisions','schools','school_attendence','site_settings','site_values','student_logins','users','item_balances');
+			
+			$in_words = explode(" ",$str);
+			if(count($in_words) > 0) {
+				$matched_count = 1;
+				foreach($in_words as $postword)
+				{
+					$postword = trim($postword);
+					//check any word contains table names
+					$db_table_word = strtolower($postword);					
+					if(in_array($db_table_word,$dbtables))
+					{
+						redirect_page();
+					}
+					//check any word contains ddl words
+					$ddl_word = strtoupper($postword);					
+					if(in_array($ddl_word,$ddl_words))
+					{
+						redirect_page();
+					}
+					
+					//Map SQL Words
+					$sqlmap_word = strtoupper($postword);
+					if(in_array($sqlmap_word,$mysql_words))
+					{
+						$matched_count++;
+					}
+					//allow only  alpha numeric and spaces 
+					$alpha_numeric_word = strtolower($postword);	
+					if(!preg_match('/^[a-z0-9 .\_]+$/i', $alpha_numeric_word))
+					{
+						 redirect_page();
+					}
+					
+					//check if it is php function 
+					$function_word = strtolower($postword);	
+					if( is_php_function($function_word))
+					{
+						redirect_page();
+					}
+					
+				}
+				if($matched_count>1)
+				{
+					redirect_page();
+				}
+				
+				
+			}
+}
+function is_php_function($function_name)
+{
+		if (function_exists($function_name)) {
+			 return true;
+		} else {
+			return false;
+		}
+}
+function redirect_page()
+{
+	
+	$keys = array_keys($_POST);
+	if(in_array('ajax_request',$keys) || in_array('password',$keys))
+	{
+		header('Content-Type: application/json');
+		$data =array("success"=>0,"message"=>'<div class="alert alert-danger" style="margin-left: 0;margin-top: 10px;">                   
+		<strong>Warning!</strong>&emsp;                Invalid Details... </div>',
+		
+		'extra_param'=>"",
+		'status'=>false,
+		);
+		
+		echo json_encode($data); 
+		die;
+	}
+		
+					$url = "http://".$_SERVER['SERVER_NAME']."/admin/errorpage";
+					header("Location:".$url);
+					die;
+}

